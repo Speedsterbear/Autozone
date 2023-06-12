@@ -33,10 +33,11 @@ public class User {
     private String password;
 
     @NotBlank
-    private String dir;
-
-    @NotBlank
     private String phone;
+
+    
+    @NotBlank
+    private String dir;
 
     public User() {
     }

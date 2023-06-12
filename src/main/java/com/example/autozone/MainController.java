@@ -39,6 +39,14 @@ public class MainController {
         return "list_products";
     }
 
+    @RequestMapping("/productlistuser")
+    public String listProductsUser(Model model) {
+        List<Product> listProducts = productservice.listAll();
+        model.addAttribute("listProducts", listProducts);
+
+        return "list_products_user";
+    }
+
     @RequestMapping("/productnew")
     public String showNewProductPage(Model model) {
         Product product = new Product();
@@ -67,6 +75,12 @@ public class MainController {
         productservice.delete(id);
         return "redirect:/productlist";
     }
+
+/////////////////////////////////////////////////////////////////////////HOME PAGE///////////////////////////////////////////////////////////////////////////////////////
+@RequestMapping("/adminhome")
+public String adminHome() {
+    return "admin_home";
+}
 /////////////////////////////////////////////////////////////////////////USER CONTROLLER//////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/userlist")
     public String listUsers(Model model) {
@@ -83,7 +97,7 @@ public class MainController {
         List<String> listProfession = Arrays.asList("Developer", "Tester", "Architect");
         model.addAttribute("listProfession", listProfession);
 
-        return "register_form";
+        return "new_user";
     }
 
     @PostMapping("/usersave")

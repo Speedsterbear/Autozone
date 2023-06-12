@@ -13,9 +13,9 @@
         method="post">
     <table border="0" cellpadding="10">
       <tr>
-        <td>Product ID:</td>
+        <td>Product Name:</td>
         <td>
-          <input type="text" th:field="*{id}"   />
+          <input type="text" th:field="*{name}" />
         </td>
       </tr>
       <tr>
@@ -29,8 +29,12 @@
         <td><input type="text" th:field="*{brand}" /></td>
       </tr>
       <tr>
-        <td>Made In:</td>
-        <td><input type="text" th:field="*{madein}" /></td>
+        <td>Description:</td>
+        <td><input type="text" th:field="*{des}" /></td>
+      </tr>
+      <tr>
+        <td>Stock:</td>
+        <td><input type="text" th:field="*{stock}" /></td>
       </tr>
       <tr>
         <td>Price:</td>
