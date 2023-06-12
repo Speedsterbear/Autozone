@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Product Manager</title>
+</head>
+<body>
+<div class="container mt-4">
+  <div class="text-center mb-4">
+    <h1>Sales List</h1>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Product ID</th>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Date</th>
+      <th>User</th>
+      <th>Stock Remaining</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${listProducts}">
+      <td th:text="${product.id}">Product ID</td>
+      <td th:text="${product.name}">Name</td>
+      <td th:text="${product.can}">Quantity</td>
+      <td th:text="${product.date}">Date</td>
+      <td th:text="${product.user}">User</td>
+      <td th:text="${product.stock}">Stock Remaining</td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="text-center mt-4">
+    <a href="/" class="btn btn-primary">HomePage</a>
+  </div>
+</div>
+</body>
+</html>

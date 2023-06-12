@@ -1,0 +1,45 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Product Manager</title>
+</head>
+<body>
+<div class="container mt-4">
+  <div class="text-center mb-4">
+    <h1>Product List</h1>
+    <a href="/productnew" class="btn btn-primary">Create New Product</a>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Product ID</th>
+      <th>Name</th>
+      <th>Brand</th>
+      <th>Description</th>
+      <th>Stock</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${listProducts}">
+      <td th:text="${product.id}">Product ID</td>
+      <td th:text="${product.name}">Name</td>
+      <td th:text="${product.brand}">Brand</td>
+      <td th:text="${product.des}">Description</td>
+      <td th:text="${product.stock}">Stock</td>
+      <td th:text="${product.price}">Price</td>
+      <td>
+        <a href="'/productedit/' + ${product.id}" class="btn btn-secondary">Edit</a>
+        <a href="'/productdelete/' + ${product.id}" class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="text-center mt-4">
+    <a href="/" class="btn btn-primary">HomePage</a>
+  </div>
+</div>
+</body>
+</html>
