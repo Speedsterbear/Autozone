@@ -3,38 +3,79 @@
 <head>
     <meta charset="utf-8" />
     <title>New User</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .form-container table {
+            margin-bottom: 0;
+        }
+
+        .form-container th, .form-container td {
+            padding: 5px;
+        }
+
+        .form-container button[type="submit"] {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-<div align="center">
-    <h1>New User</h1>
-    <br />
-    <form action="#" th:action="@{/usersave}" th:object="${user}" method="post">
-        <table border="0" cellpadding="10">
-            <tr>
-                <td>Full name:</td>
-                <td><input type="text" th:field="*{name}" /></td>
-            </tr>
-            <tr>
-                <td>E-mail:</td>
-                <td><input type="text" th:field="*{email}" /></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type="password" th:field="*{password}" /></td>
-            </tr>
-            <tr>
-                <td>Phone:</td>
-                <td><input type="text" th:field="*{phone}" /></td>
-            </tr>
-            <tr>
-                <td>Direction:</td>
-                <td><textarea rows="5" cols="25" th:field="*{dir}"></textarea></td>
-            </tr>
-            <tr>
-                <td colspan="2"><button type="submit">Register</button></td>
-            </tr>
-        </table>
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="form-container">
+                <h1 class="text-center">New User</h1>
+                <br />
+                <form action="#" th:action="@{/usersave}" th:object="${user}" method="post">
+                    <table class="table" cellpadding="10">
+                        <tr>
+                            <th>Full name:</th>
+                            <td><input type="text" th:field="*{name}" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <th>E-mail:</th>
+                            <td><input type="text" th:field="*{email}" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <th>Password:</th>
+                            <td><input type="password" th:field="*{password}" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <th>Phone:</th>
+                            <td><input type="text" th:field="*{phone}" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <th>Direction:</th>
+                            <td><textarea rows="5" cols="25" th:field="*{dir}" class="form-control"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

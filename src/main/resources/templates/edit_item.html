@@ -1,51 +1,92 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <title>EDIT To Cart</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .form-container table {
+            margin-bottom: 0;
+        }
+
+        .form-container th,
+        .form-container td {
+            padding: 5px;
+        }
+
+        .form-container button[type="submit"] {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-<div align="center">
-    <h1>EDIT to cart</h1>
-    <br />
-    <form action="#" th:action="@{/cartsave}" th:object="${cart}"
-          method="post">
-        <table border="0" cellpadding="10">
-            <tr>
-                <td>ID:</td>
-                <td>
-                    <input type="text" th:field="*{id}" name="id" readonly="readonly"/>
-                </td>
-            </tr>
-            <tr>
-                <td>Product ID:</td>
-                <td>
-                    <input type="text" th:field="*{productid}" name="prductId" readonly="readonly"/>
-                </td>
-            </tr>
-            <tr>
-                <td>Product Name:</td>
-                <td>
-                    <input type="text" th:field="*{name}" name="name" readonly="readonly" />
-                </td>
-            </tr>
-            <tr>
-                <td>Price:</td>
-                <td>
-                    <input type="text" th:field="*{price}" name="price" readonly="readonly" />
-                </td>
-            </tr>
-            <tr>
-                <td>Quantity:</td>
-                <td>
-                    <input type="number" name="quantity" th:field="*{can}" min="1" value="1"/>
-                </td>
-            </tr>
-            <td colspan="2"><button type="submit">Edit</button> </td>
-            </tr>
-        </table>
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="form-container">
+                <h1 class="text-center">EDIT to cart</h1>
+                <br />
+                <form action="#" th:action="@{/cartsave}" th:object="${cart}" method="post">
+                    <table class="table" cellpadding="10">
+                        <tr>
+                            <th>ID:</th>
+                            <td>
+                                <input type="text" th:field="*{id}" name="id" readonly="readonly" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Product ID:</th>
+                            <td>
+                                <input type="text" th:field="*{productid}" name="prductId" readonly="readonly" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Product Name:</th>
+                            <td>
+                                <input type="text" th:field="*{name}" name="name" readonly="readonly" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Price:</th>
+                            <td>
+                                <input type="text" th:field="*{price}" name="price" readonly="readonly" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Quantity:</th>
+                            <td>
+                                <input type="number" name="quantity" th:field="*{can}" min="1" value="1" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button type="submit" class="btn btn-primary">Edit</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

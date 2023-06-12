@@ -59,20 +59,21 @@ public class MainController {
         return "new_product";
     }
 
-    @RequestMapping(value = "/productsave", method = RequestMethod.POST)
-    public String saveProduct(@ModelAttribute("product") Product product) {
+    @PostMapping("/productsave")
+    public String saveProduct(@Valid @ModelAttribute("product") Product product) {
         productservice.save(product);
         return "redirect:/productlist";
     }
+
 
     @RequestMapping("/productedit/{id}")
     public ModelAndView showEditProductPage(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit_product");
         Product product = productservice.get(id);
         mav.addObject("product", product);
-
         return mav;
     }
+
 
     @RequestMapping("/productadd/{id}")
     public ModelAndView addCart(@PathVariable(name = "id") int id) {
@@ -110,15 +111,8 @@ public String adminHome() {
 
     @PostMapping("/usersave")
     public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            return "register_form";
-        } else {
             userservice.save(user);
             return "redirect:/userlist";
-        }
-
-
     }
 
     @RequestMapping("/useredit/{id}")
@@ -178,9 +172,9 @@ public String adminHome() {
     }
 
     @PostMapping("/cartsave")
-    public String saveCart(@Valid @ModelAttribute("cart") Cart cart, BindingResult bindingResult, Model model) {
+    public String saveCart(@Valid @ModelAttribute("cart") Cart cart, Model model) {
         cartservice.save(cart);
-            return "redirect:/cart";
+        return "redirect:/cart";
         }
 
 

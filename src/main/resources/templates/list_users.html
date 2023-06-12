@@ -4,40 +4,80 @@
 <head>
     <meta charset="utf-8"/>
     <title>User Manager</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .table {
+            margin-top: 50px;
+        }
+
+        .logo-image {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
 </head>
 <body>
-<div align="center">
-    <h1>User List</h1>
-    <a href="/usernew">Register New User</a>
-    <br/><br/>
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>User ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Direction</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${listUsers}">
-            <td th:text="${user.id}">User ID</td>
-            <td th:text="${user.name}">Name</td>
-            <td th:text="${user.email}">Email</td>
-            <td th:text="${user.phone}">Phone</td>
-            <td th:text="${user.dir}">Direction</td>
-            <td>
-                <a th:href="'/useredit/' + ${user.id}">Edit</a>
-                &nbsp;&nbsp;&nbsp;
-                <a th:href="'/userdelete/' + ${user.id}">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <a href="/">HomePage</a>
-    <br/><br/>
+<div class="container">
+    <div class="text-center">
+        <img src="https://app.facturame.mx/Autozone/images/logo.png" alt="AutoZone Image" class="logo-image">
+        <br /><br />
+        <a href="/usernew" class="btn btn-danger">
+            <i class="fas fa-user-plus"></i> Register New User
+        </a>
+        <br /><br />
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Direction</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${listUsers}">
+                <td th:text="${user.id}">User ID</td>
+                <td th:text="${user.name}">Name</td>
+                <td th:text="${user.email}">Email</td>
+                <td th:text="${user.phone}">Phone</td>
+                <td th:text="${user.dir}">Direction</td>
+                <td>
+                    <a th:href="'/useredit/' + ${user.id}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a th:href="'/userdelete/' + ${user.id}" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-danger home-button">
+            <i class="fas fa-home"></i> HomePage
+        </a>
+        <br /><br />
+    </div>
 </div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- Font Awesome JS (optional) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
 </body>
 </html>
