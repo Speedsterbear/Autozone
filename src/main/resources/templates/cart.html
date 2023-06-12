@@ -32,8 +32,7 @@
         </tr>
         </tbody>
     </table>
-
-    <!-- Checkout button -->
+    <p>Total Cost: <span th:text="${#numbers.formatDecimal(totalCost, 0, 'COMMA', 2, 'POINT')}"></span></p>
     <div class="mt-4">
         <form action="#" th:action="@{/checkout}" method="post">
             <button type="submit">Checkout</button>
