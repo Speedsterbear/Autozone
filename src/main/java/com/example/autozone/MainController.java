@@ -1,6 +1,8 @@
 package com.example.autozone;
 
 
+import com.example.autozone.cart.Cart;
+import com.example.autozone.cart.CartService;
 import com.example.autozone.product.ProductService;
 import com.example.autozone.user.User;
 import com.example.autozone.user.UserService;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.autozone.product.Product;
 
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -25,6 +26,9 @@ public class MainController {
 
     @Autowired
     private UserService userservice;
+
+    @Autowired
+    private CartService cartservice;
 
     @RequestMapping("/")
     public String viewHomePage(){
@@ -58,15 +62,23 @@ public class MainController {
     @RequestMapping(value = "/productsave", method = RequestMethod.POST)
     public String saveProduct(@ModelAttribute("product") Product product) {
         productservice.save(product);
-
         return "redirect:/productlist";
     }
+
     @RequestMapping("/productedit/{id}")
     public ModelAndView showEditProductPage(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit_product");
         Product product = productservice.get(id);
         mav.addObject("product", product);
 
+        return mav;
+    }
+
+    @RequestMapping("/productadd/{id}")
+    public ModelAndView addCart(@PathVariable(name = "id") int id) {
+        ModelAndView mav = new ModelAndView("add_cart");
+        Product product = productservice.get(id);
+        mav.addObject("product", product);
         return mav;
     }
 
@@ -93,23 +105,16 @@ public String adminHome() {
     public String showForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-
-        List<String> listProfession = Arrays.asList("Developer", "Tester", "Architect");
-        model.addAttribute("listProfession", listProfession);
-
         return "new_user";
     }
 
     @PostMapping("/usersave")
     public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
 
-        userservice.save(user);
         if (bindingResult.hasErrors()) {
-            List<String> listProfession = Arrays.asList("Developer", "Tester", "Architect");
-            model.addAttribute("listProfession", listProfession);
             return "register_form";
         } else {
-
+            userservice.save(user);
             return "redirect:/userlist";
         }
 
@@ -129,5 +134,56 @@ public String adminHome() {
         userservice.delete(id);
         return "redirect:/userlist";
     }
+///////////////////////////////////////////////////////////////////SHOPPING CART//////////////////////////////////////////////////////////////////////////////////////
+
+    @PostMapping("/addcartitem")
+    public String addCartItem(@RequestParam("id") long productId,
+                              @RequestParam("name") String productName,
+                              @RequestParam("price") float price,
+                              @RequestParam("quantity") int quantity) {
+        cartservice.addCartItem(productId, productName, price, quantity);
+        return "redirect:/productlistuser";
+    }
+
+    @RequestMapping("/cart")
+    public String viewCartPage(Model model) {
+        List<Cart> cartItems = cartservice.listAll();
+        model.addAttribute("listCarts", cartItems);
+        double totalCost = cartservice.getTotalCost();
+        model.addAttribute("totalCost", totalCost);
+        return "cart";
+    }
+
+    @PostMapping("/checkout")
+    public String checkout() {
+        List<Cart> cartItems = cartservice.listAll();
+        for (Cart item : cartItems) {
+            productservice.subtractFromStock(item.getProductid(), item.getCan());
+        }
+        cartservice.deleteAll();
+        return "redirect:/";
+    }
+    @RequestMapping("/cartitemdelete/{id}")
+    public String deleteCart(@PathVariable(name = "id") int id) {
+        cartservice.delete(id);
+        return "redirect:/cart";
+    }
+
+    @RequestMapping("/cartitemedit/{id}")
+    public ModelAndView showEditCartItemPage(@PathVariable(name = "id") int id) {
+        ModelAndView mav = new ModelAndView("edit_item");
+        Cart cart = cartservice.get(id);
+        mav.addObject("cart", cart);
+        return mav;
+    }
+
+    @PostMapping("/cartsave")
+    public String saveCart(@Valid @ModelAttribute("cart") Cart cart, BindingResult bindingResult, Model model) {
+        cartservice.save(cart);
+            return "redirect:/cart";
+        }
+
+
+
 
 }

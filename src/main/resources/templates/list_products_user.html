@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Product Manager</title>
+  <meta charset="utf-8"/>
+  <title>Product List</title>
 </head>
 <body>
-<div class="container mt-4">
-  <div class="text-center mb-4">
-    <h1>Product List</h1>
-  </div>
-  <table class="table">
+<div align="center">
+  <h1>Product List</h1>
+  <br/><br/>
+  <table border="1" cellpadding="10">
     <thead>
     <tr>
       <th>Product ID</th>
       <th>Name</th>
       <th>Brand</th>
       <th>Description</th>
+      <th>Stock</th>
       <th>Price</th>
       <th>Actions</th>
     </tr>
@@ -26,16 +27,16 @@
       <td th:text="${product.name}">Name</td>
       <td th:text="${product.brand}">Brand</td>
       <td th:text="${product.des}">Description</td>
+      <td th:text="${product.stock}">Stock</td>
       <td th:text="${product.price}">Price</td>
       <td>
-        <a href="'/productedit/' + ${product.id}" class="btn btn-secondary">Add To Cart</a>
+        <a th:href="'/productadd/' + ${product.id}">Add to cart</a>
       </td>
     </tr>
     </tbody>
   </table>
-  <div class="text-center mt-4">
-    <a href="/" class="btn btn-primary">HomePage</a>
-  </div>
+  <a href="/">HomePage</a><br/><br/>
+  <a href="/cart">CART</a><br/><br/>
 </div>
 </body>
 </html>

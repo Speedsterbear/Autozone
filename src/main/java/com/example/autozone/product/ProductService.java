@@ -30,5 +30,10 @@ public class ProductService {
         repo.deleteById(id);
     }
 
-    public void deleteAll(){repo.deleteAll();}
+    public void subtractFromStock(long id, int quantity) {
+        Product product = repo.findById(id).get();
+        int newStock = product.getStock() - quantity;
+        product.setStock(newStock);
+        repo.save(product);
+    }
 }
